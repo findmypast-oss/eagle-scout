@@ -5,6 +5,7 @@
 const program = require('commander');
 const version = require('../package.json').version;
 const greet = require('./commands/greet');
+const hunt = require('./commands/hunt')
 
 const shoutOption = {
   flag: '-s, --shout',
@@ -16,6 +17,11 @@ const greetOption = {
   description: 'Change the greeting from the default "Hello" greeting'
 };
 
+const sourcegraphOption = {
+  flag: '-s, --sourcegraph <address>',
+  description: 'Use the specifed SourceGraph address to scrape'
+};
+
 program
   .version(version);
 
@@ -25,5 +31,12 @@ program
   .option(shoutOption.flag, shoutOption.description)
   .option(greetOption.flag, greetOption.description)
   .action(greet);
+
+program
+  .command('hunt')
+  .arguments('<token>')
+  .description('Scouts repositories with the given SourceGraph <token>')
+  .option(sourcegraphOption.flag, sourcegraphOption.description)
+  .action(async (token, opts) => await hunt(token, opts));
 
 program.parse(process.argv);
