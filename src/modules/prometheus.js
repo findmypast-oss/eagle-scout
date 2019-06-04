@@ -1,28 +1,17 @@
 const axios = require("axios")
+const client = require('prom-client');
 
-let PROMETHEUS_ADDRESS = 'http://fh1-prom01.dun.fh:9091'
-
-function managePrometheusAddress(opts) {
-    if (!opts.prometheusAddress)
-        return
-    PROMETHEUS_ADDRESS = opts.prometheusAddress
-}
+let gateway = new client.Pushgateway('http://fh1-prom01.dun.fh:9091');
 
 async function push(jobName, labelName, labelValue, opts) {
-    managePrometheusAddress(opts)
 
     try {
-        const result = await axios(
-            {
-                method: 'post',
-                url: `${PROMETHEUS_ADDRESS}/metrics/job/${jobName}`,
-                headers: { 'Content-Type': 'application/octet-stream' },
-                data: `${labelName} ${labelValue}`
-            })
+
+        gateway.pushAdd({ jobName: jobName, groupings: { service: labelName, value: "true" } }, (err, resp, body) => {
+        })
     } catch (ex) {
         console.log(JSON.stringify(ex))
     }
-    console.log(result)
 }
 
 module.exports = push
