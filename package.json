@@ -26,6 +26,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "commander": "^2.16.0",
+    "node-statsd": "^0.1.1",
     "prom-client": "^11.3.0"
   }
 }

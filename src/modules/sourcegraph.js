@@ -52,7 +52,7 @@ async function getORs(token, opts) {
         const blob = await getBlob(repository, lastRevision)
 
         const serviceName = repository.replace("github.com/findmypast/","")
-        ORs.push({ serviceName, blob })
+        ORs.push({ serviceName, data: blob })
     }
     return ORs
 }
