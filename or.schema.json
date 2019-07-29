@@ -1,0 +1,292 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Operational Requirements",
+  "description": "Completion states of service operational requirements",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "path to the JSON-schema to use for this file"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Owner team of the service"
+    },
+    "serviceName": {
+      "type": "string",
+      "description": "Name of the service"
+    },
+    "or": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Operational requirements",
+      "properties": {
+        "slo": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "hasSlo": {
+              "$ref": "#/definitions/completion"
+            }
+          },
+          "required": [
+            "hasSlo"
+          ]
+        },
+        "automatedTesting": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "unitTests": {
+              "$ref": "#/definitions/completion"
+            },
+            "integrationTests": {
+              "$ref": "#/definitions/completion"
+            },
+            "criticalPathTests": {
+              "$ref": "#/definitions/completion"
+            },
+            "stressTests": {
+              "$ref": "#/definitions/completion"
+            },
+            "chaosDays": {
+              "$ref": "#/definitions/completion"
+            },
+            "securityTests": {
+              "$ref": "#/definitions/completion"
+            }
+          },
+          "required": [
+            "unitTests",
+            "integrationTests",
+            "criticalPathTests",
+            "stressTests",
+            "chaosDays",
+            "securityTests"
+          ]
+        },
+        "localDevExperience": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "automatedSetup": {
+              "$ref": "#/definitions/completion"
+            },
+            "debugging": {
+              "$ref": "#/definitions/completion"
+            }
+          },
+          "required": [
+            "automatedSetup",
+            "debugging"
+          ]
+        },
+        "deploymentAndRelease": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "featureToggles": {
+              "$ref": "#/definitions/completion"
+            },
+            "ciPipeline": {
+              "$ref": "#/definitions/completion"
+            },
+            "ciRollback": {
+              "$ref": "#/definitions/completion"
+            }
+          },
+          "required": [
+            "featureToggles",
+            "ciPipeline",
+            "ciRollback"
+          ]
+        },
+        "resilienceAndStability": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "handleUpstreamFailures": {
+              "$ref": "#/definitions/completion"
+            },
+            "failoverRedundancy": {
+              "$ref": "#/definitions/completion"
+            },
+            "horizontalScaling": {
+              "$ref": "#/definitions/completion"
+            },
+            "featureTogglesAroundNonEssentialFeatures": {
+              "$ref": "#/definitions/completion"
+            },
+            "uptimeEndpoints": {
+              "$ref": "#/definitions/completion"
+            }
+          },
+          "required": [
+            "handleUpstreamFailures",
+            "failoverRedundancy",
+            "horizontalScaling",
+            "featureTogglesAroundNonEssentialFeatures",
+            "uptimeEndpoints"
+          ]
+        },
+        "monitoringAndAlerting": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "businessMetricsAlerts": {
+              "$ref": "#/definitions/completion"
+            },
+            "unavailableServiceAlerts": {
+              "$ref": "#/definitions/completion"
+            },
+            "resourceLimitAlerts": {
+              "$ref": "#/definitions/completion"
+            }
+          },
+          "required": [
+            "businessMetricsAlerts",
+            "unavailableServiceAlerts",
+            "resourceLimitAlerts"
+          ]
+        },
+        "loggingAndDebugging": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "performanceMetrics": {
+              "$ref": "#/definitions/completion"
+            },
+            "businessMetrics": {
+              "$ref": "#/definitions/completion"
+            },
+            "errorLogging": {
+              "$ref": "#/definitions/completion"
+            },
+            "tracingHeaders": {
+              "$ref": "#/definitions/completion"
+            },
+            "infoLogging": {
+              "$ref": "#/definitions/completion"
+            },
+            "logLevelToggle": {
+              "$ref": "#/definitions/completion"
+            }
+          },
+          "required": [
+            "performanceMetrics",
+            "businessMetrics",
+            "errorLogging",
+            "tracingHeaders",
+            "infoLogging",
+            "logLevelToggle"
+          ]
+        },
+        "dashboards": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "businessMetrics": {
+              "$ref": "#/definitions/completion"
+            },
+            "slo": {
+              "$ref": "#/definitions/completion"
+            },
+            "k8sOps": {
+              "$ref": "#/definitions/completion"
+            }
+          },
+          "required": [
+            "businessMetrics",
+            "slo",
+            "k8sOps"
+          ]
+        },
+        "documentationAndProcess": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "reviewedTSG": {
+              "$ref": "#/definitions/completion"
+            },
+            "TSG": {
+              "$ref": "#/definitions/completion"
+            },
+            "owner": {
+              "$ref": "#/definitions/completion"
+            },
+            "readme": {
+              "$ref": "#/definitions/completion"
+            }
+          },
+          "required": [
+            "reviewedTSG",
+            "TSG",
+            "owner",
+            "readme"
+          ]
+        },
+        "databases": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "automatedMigrationSystem": {
+              "$ref": "#/definitions/completion"
+            },
+            "failoverRedundancy": {
+              "$ref": "#/definitions/completion"
+            },
+            "backups": {
+              "$ref": "#/definitions/completion"
+            },
+            "restorePlan": {
+              "$ref": "#/definitions/completion"
+            },
+            "testRestore": {
+              "$ref": "#/definitions/completion"
+            }
+          },
+          "required": [
+            "automatedMigrationSystem",
+            "failoverRedundancy",
+            "backups",
+            "restorePlan",
+            "testRestore"
+          ]
+        },
+        "serviceMaintenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "dependenciesUpToDate": {
+              "$ref": "#/definitions/completion"
+            }
+          },
+          "required": [
+            "dependenciesUpToDate"
+          ]
+        }
+      }
+    }
+  },
+  "definitions": {
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "completed": {
+          "type": "boolean",
+          "description": "Requirement completed?"
+        },
+        "moreInfo": {
+          "type": "string",
+          "minLength": 3,
+          "description": "More info on this requirement"
+        }
+      },
+      "required": [
+        "completed"
+      ]
+    }
+  }
+}

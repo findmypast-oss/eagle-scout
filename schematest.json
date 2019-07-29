@@ -1,0 +1,177 @@
+{
+    "$schema": "./or.schema.json",
+    "owner": "spanners",
+    "serviceName": "flipper",
+    "or": {
+        "slo": {
+            "hasSlo": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/YIl4yO44/272-service-level-objectives-define-slo"
+            }
+        },
+        "automatedTesting": {
+            "unitTests": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/nfyJf9xv/274-automated-testing-unit-tests"
+            },
+            "integrationTests": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/9Od9EfpR/283-automated-testing-integration-tests"
+            },
+            "criticalPathTests": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/NuVXcJT8/284-automated-testing-critical-path-tests"
+            },
+            "stressTests": {
+                "completed": false
+            },
+            "chaosDays": {
+                "completed": true
+            },
+            "securityTests": {
+                "completed": false
+            }
+        },
+        "localDevExperience": {
+            "automatedSetup": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/1uciFnmZ/285-local-developer-experience-automated-setup"
+            },
+            "debugging": {
+                "completed": false,
+                "moreInfo": "https://trello.com/c/QA3AJZEl/286-local-developer-experience-debugging"
+            }
+        },
+        "deploymentAndRelease": {
+            "featureToggles": {
+                "completed": false,
+                "moreInfo": "https://trello.com/c/f3fieUEl/287-deployment-and-release-feature-toggles"
+            },
+            "ciPipeline": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/rsnBjDo7/288-deployment-and-release-ci-pipeline"
+            },
+            "ciRollback": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/EbGEJjCL/289-deployment-and-release-ci-rollback"
+            }
+        },
+        "resilienceAndStability": {
+            "handleUpstreamFailures": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/1luB2zNU/290-resilience-and-stability-handle-upstream-failures"
+            },
+            "failoverRedundancy": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/RkOGNXSO/291-resilience-and-stability-failover-redundancy"
+            },
+            "horizontalScaling": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/EZsVJWCz/292-resilience-and-stability-horizontal-scaling"
+            },
+            "featureTogglesAroundNonEssentialFeatures": {
+                "completed": false,
+                "moreInfo": "https://trello.com/c/i2DB4UHi/293-resilience-and-stability-add-feature-toggle-around-non-essential-features"
+            },
+            "uptimeEndpoints": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/g4rOMMR7/294-resilience-and-stability-uptime-endpoints"
+            }
+        },
+        "monitoringAndAlerting": {
+            "businessMetricsAlerts": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/fdUf06gC/273-monitoring-and-alerting-create-business-metrics-alerts"
+            },
+            "unavailableServiceAlerts": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/NmKGZgjj/275-monitoring-and-alerting-alert-fires-on-unavailable-service"
+            },
+            "resourceLimitAlerts": {
+                "completed": false,
+                "moreInfo": "https://trello.com/c/OqFBjql0/276-monitoring-and-alerting-alert-fires-on-resource-limits"
+            }
+        },
+        "loggingAndDebugging": {
+            "performanceMetrics": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/jgOZEJPE/277-logging-instrumentation-report-performance-metrics"
+            },
+            "businessMetrics": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/M8cTMavI/278-logging-instrumentation-report-business-metrics"
+            },
+            "errorLogging": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/5poFiqfc/279-logging-instrumentation-log-all-errors"
+            },
+            "tracingHeaders": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/IIUjJPAE/280-logging-instrumentation-forward-tracing-headers"
+            },
+            "infoLogging": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/POkLcGYS/281-logging-instrumentation-log-information-messages"
+            },
+            "logLevelToggle": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/BQeoakEA/282-logging-instrumentation-log-level-toggle"
+            }
+        },
+        "dashboards": {
+            "businessMetrics": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/CZj2Crb8/295-dashboards-business-metric-dashboard"
+            },
+            "slo": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/zmTC7y33/296-dashboards-slo-dashboard"
+            },
+            "k8sOps": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/ldVhOJRg/297-dashboards-k8s-ops-dashboard"
+            }
+        },
+        "documentationAndProcess": {
+            "reviewedTSG": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/IgUHvd2l/299-documentation-and-process-tsg-is-externally-reviewed"
+            },
+            "TSG": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/vrFVxPtI/298-documentation-and-process-tsg"
+            },
+            "owner": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/0bJjmkRD/300-documentation-and-process-service-must-have-an-owner"
+            },
+            "readme": {
+                "completed": true,
+                "moreInfo": "https://trello.com/c/XWaJNyoC/301-documentation-and-process-service-readme"
+            }
+        },
+        "databases": {
+            "automatedMigrationSystem": {
+                "completed": false,
+                "moreInfo": "https://trello.com/c/wRGaGGJ7/302-databases-automated-migration-from-ci"
+            },
+            "failoverRedundancy": {
+                "completed": false
+            },
+            "backups": {
+                "completed": false
+            },
+            "restorePlan": {
+                "completed": false
+            },
+            "testRestore": {
+                "completed": false
+            }
+        },
+        "serviceMaintenance": {
+            "dependenciesUpToDate": {
+                "completed": false
+            }
+        }
+    }
+}
