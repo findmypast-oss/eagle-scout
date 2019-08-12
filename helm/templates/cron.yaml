@@ -13,30 +13,22 @@ spec:
     spec:
       template:
         spec:
+          serviceAccountName: vault-auth
           initContainers:
-            - name: {{ .Chart.Name }}-init
-              envFrom:
-              - configMapRef:
-                  name: {{ template "service.name" . }}-init
-              image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
-              imagePullPolicy: {{ .Values.initImage.pullPolicy }}
-              {{ if .Values.initContainer.command }}
-              command: {{ .Values.initContainer.command }}
-              {{ end }}
-              volumeMounts:
-              - name: {{ .Values.vault.volumes.vaultSecrets.name }}
-                mountPath: {{ .Values.vault.volumes.vaultSecrets.initSecretsMountPath }}
-              - name: {{ .Values.vault.volumes.initConfig.name }}
-                mountPath: {{ .Values.vault.volumes.initConfig.initConfigMountPath }}
-          volumes:
-          - name: {{ .Values.vault.volumes.vaultSecrets.name }}
-            emptyDir: {}
-          - name: {{ .Values.vault.volumes.initConfig.name }}
-            configMap:
-              name: {{ template "service.name" . }}-init
-              items:
-              - key: secretsPath
-                path:  {{ .Values.vault.secretPathFilename}}
+          - name: {{ .Chart.Name }}-init
+            envFrom:
+            - configMapRef:
+                name: {{ template "service.name" . }}-init
+            image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+            imagePullPolicy: {{ .Values.initImage.pullPolicy }}
+            {{ if .Values.initContainer.command }}
+            command: {{ .Values.initContainer.command }}
+            {{ end }}
+            volumeMounts:
+            - name: {{ .Values.vault.volumes.vaultSecrets.name }}
+              mountPath: {{ .Values.vault.volumes.vaultSecrets.initSecretsMountPath }}
+            - name: {{ .Values.vault.volumes.initConfig.name }}
+              mountPath: {{ .Values.vault.volumes.initConfig.initConfigMountPath }}
           containers:
           - name: {{ template "service.name" . }}
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -51,3 +43,12 @@ spec:
             resources:
 {{ toYaml .Values.resources | indent 14 }}
           restartPolicy: Never
+          volumes:
+          - name: {{ .Values.vault.volumes.vaultSecrets.name }}
+            emptyDir: {}
+          - name: {{ .Values.vault.volumes.initConfig.name }}
+            configMap:
+              name: {{ template "service.name" . }}-init
+              items:
+              - key: secretsPath
+                path:  {{ .Values.vault.secretPathFilename}}
