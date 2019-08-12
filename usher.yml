@@ -2,7 +2,7 @@ version: '2'
 
 vars:
   registry: docker-registry.dun.fh
-  base_service_name: eaglescout
+  base_service_name: eagle-scout
 
 include:
   - from: git+ssh://git@github.com:findmypast/usher_shared_tasks.git
@@ -39,3 +39,20 @@ tasks:
     service_name: publish
     env:
       - IMAGE=<%=registry%>/findmypast/<%=base_service_name%>:<%=version%>
+
+  deploy_integration:
+    do: sequence
+    service_name: <%=base_service_name%>
+    environment: integration
+    actions:
+      - do: shell
+        command: npm i fs-extra
+      - do: create_secret_paths_file
+        secretPathsLocation: ./helm/secret-paths.json
+      - do: global.deploy_k8s.deploy
+        description: Deploy to K8s
+        helm_overrides:
+          environment: <%=environment%>
+          image.tag: <%=version%>
+          initContainer.k8sAuthPath: staging
+          sidecarInjection: 'false'

@@ -1,0 +1,53 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ template "service.name" . }}
+  labels:
+    app: {{ template "service.name" . }}
+spec:
+  ttlSecondsAfterFinished: 100
+  schedule: "{{ .Values.job.schedule }}"
+  successfulJobsHistoryLimit: {{ .Values.job.successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.job.failedJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          initContainers:
+            - name: {{ .Chart.Name }}-init
+              envFrom:
+              - configMapRef:
+                  name: {{ template "service.name" . }}-init
+              image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+              imagePullPolicy: {{ .Values.initImage.pullPolicy }}
+              {{ if .Values.initContainer.command }}
+              command: {{ .Values.initContainer.command }}
+              {{ end }}
+              volumeMounts:
+              - name: {{ .Values.vault.volumes.vaultSecrets.name }}
+                mountPath: {{ .Values.vault.volumes.vaultSecrets.initSecretsMountPath }}
+              - name: {{ .Values.vault.volumes.initConfig.name }}
+                mountPath: {{ .Values.vault.volumes.initConfig.initConfigMountPath }}
+          volumes:
+          - name: {{ .Values.vault.volumes.vaultSecrets.name }}
+            emptyDir: {}
+          - name: {{ .Values.vault.volumes.initConfig.name }}
+            configMap:
+              name: {{ template "service.name" . }}-init
+              items:
+              - key: secretsPath
+                path:  {{ .Values.vault.secretPathFilename}}
+          containers:
+          - name: {{ template "service.name" . }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            volumeMounts:
+            - name: {{ .Values.vault.volumes.vaultSecrets.name }}
+              mountPath: {{ .Values.vault.volumes.vaultSecrets.appSecretsMountPath }}
+            command: 
+{{ toYaml .Values.image.command | indent 14 }}
+            args:
+{{ toYaml .Values.image.args | indent 14 }}
+            resources:
+{{ toYaml .Values.resources | indent 14 }}
+          restartPolicy: Never

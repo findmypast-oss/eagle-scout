@@ -1,0 +1,41 @@
+image:
+  repository: docker-registry.dun.fh/findmypast/eagle-scout
+  tag: master
+  pullPolicy: Always
+  args:
+  - "eaglescout"
+  - "hunt"
+  - "-c /usr/src/app/secrets/secrets.json"
+
+job:
+  schedule: "* * * * *"
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 3
+
+resources:
+  limits:
+   cpu: 200m
+   memory: 500Mi
+
+initImage:
+  repository: fh1-harbor01.dun.fh/findmypast/k8s-vault-reader
+  tag: latest
+  pullPolicy: Always
+
+initContainer:
+  command: "['node', '/usr/src/app/src/init.js']"
+  k8sAuthPath: staging
+
+vault:
+  secretPathFilename: secret-paths.json
+  secretsFilename: secrets.json
+  volumes:
+    vaultSecrets:
+      name: vault
+      appSecretsMountPath: /usr/src/app/secrets
+      initSecretsMountPath: /usr/src/app/secrets
+    initConfig:
+      name: init-config-volume
+      initConfigMountPath: /usr/src/app/config
+
+
