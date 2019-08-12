@@ -9,6 +9,8 @@ include:
     name: shared_tasks as global
     import:
       - docker
+      - deploy_k8s
+      - domesday
 
 tasks:
   build:
@@ -56,3 +58,10 @@ tasks:
           image.tag: <%=version%>
           initContainer.k8sAuthPath: staging
           sidecarInjection: 'false'
+
+  create_secret_paths_file:
+    do: shell
+    command: node config/secret-path-generator.js
+    env:
+      - ENVIRONMENT=<%=environment%>
+      - SECRETS_FILEPATH=<%=secretPathsLocation%>

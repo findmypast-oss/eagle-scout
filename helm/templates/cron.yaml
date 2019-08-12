@@ -45,7 +45,7 @@ spec:
             - name: {{ .Values.vault.volumes.vaultSecrets.name }}
               mountPath: {{ .Values.vault.volumes.vaultSecrets.appSecretsMountPath }}
             command: 
-{{ toYaml .Values.image.command | indent 14 }}
+{{ toYaml .Values.container.command | indent 14 }}
             args:
 {{ toYaml .Values.image.args | indent 14 }}
             resources:

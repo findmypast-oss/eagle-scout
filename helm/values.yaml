@@ -2,10 +2,9 @@ image:
   repository: docker-registry.dun.fh/findmypast/eagle-scout
   tag: master
   pullPolicy: Always
-  args:
-  - "eaglescout"
-  - "hunt"
-  - "-c /usr/src/app/secrets/secrets.json"
+
+container:
+  command: ['./src/cli.js', 'hunt', '-c', '/usr/src/app/secrets/secrets.json']
 
 job:
   schedule: "* * * * *"
