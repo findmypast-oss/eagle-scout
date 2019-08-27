@@ -7,7 +7,7 @@ container:
   command: ['./src/cli.js', 'hunt', '-c', '/usr/src/app/secrets/secrets.json']
 
 job:
-  schedule: "* * * * *"
+  schedule: "0 1 * * *"
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 3
 
